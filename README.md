@@ -1,12 +1,12 @@
 <div align="center">
 <img src="admin/public/project_nomad_logo.webp" width="200" height="200"/>
 
-# Project N.O.M.A.D.
-### Node for Offline Media, Archives, and Data
+# Projet N.O.M.A.D.
+### Nœud pour les médias, les archives et les données hors ligne
 
-**Knowledge That Never Goes Offline**
+**Des connaissances qui ne se déconnectent jamais**
 
-[![Website](https://img.shields.io/badge/Website-projectnomad.us-blue)](https://www.projectnomad.us)
+[![Site Web](https://img.shields.io/badge/Website-projectnomad.us-blue)](https://www.projectnomad.us)
 [![Discord](https://img.shields.io/badge/Discord-Join%20Community-5865F2)](https://discord.com/invite/crosstalksolutions)
 [![Benchmark](https://img.shields.io/badge/Benchmark-Leaderboard-green)](https://benchmark.projectnomad.us)
 
@@ -14,14 +14,14 @@
 
 ---
 
-Project N.O.M.A.D. is a self-contained, offline-first knowledge and education server packed with critical tools, knowledge, and AI to keep you informed and empowered—anytime, anywhere.
+Projet N.O.M.A.D.est un serveur de connaissances et d'éducation autonome et hors ligne, doté d'outils, de connaissances et d'IA essentiels pour vous tenir informé et responsabilisé, à tout moment et en tout lieu.
 
-## Installation & Quickstart
-Project N.O.M.A.D. can be installed on any Debian-based operating system (we recommend Ubuntu). Installation is completely terminal-based, and all tools and resources are designed to be accessed through the browser, so there's no need for a desktop environment if you'd rather setup N.O.M.A.D. as a "server" and access it through other clients.
+## Installation et démarrage rapide
+Projet N.O.M.A.D.peut être installé sur n’importe quel système d’exploitation basé sur Debian (nous recommandons Ubuntu).L'installation est entièrement basée sur un terminal et tous les outils et ressources sont conçus pour être accessibles via le navigateur. Vous n'avez donc pas besoin d'un environnement de bureau si vous préférez configurer N.O.M.A.D.en tant que "serveur" et y accéder via d'autres clients.
 
-*Note: sudo/root privileges are required to run the install script*
+*Remarque : les privilèges sudo/root sont requis pour exécuter le script d'installation*
 
-### Quick Install (Debian-based OS Only)
+### Installation rapide (système d'exploitation basé sur Debian uniquement)
 ```bash
 sudo apt-get update && \
 sudo apt-get install -y curl && \
@@ -30,136 +30,136 @@ curl -fsSL https://raw.githubusercontent.com/Crosstalk-Solutions/project-nomad/r
 sudo bash install_nomad.sh
 ```
 
-Project N.O.M.A.D. is now installed on your device! Open a browser and navigate to `http://localhost:8080` (or `http://DEVICE_IP:8080`) to start exploring!
+Projet N.O.M.A.D.est maintenant installé sur votre appareil !Ouvrez un navigateur et accédez à`http://localhost:8080`(ou`http://DEVICE_IP:8080`) pour commencer à explorer !
 
-For a complete step-by-step walkthrough (including Ubuntu installation), see the [Installation Guide](https://www.projectnomad.us/install).
+Pour une procédure complète étape par étape (y compris l'installation d'Ubuntu), consultez le [Guide d'installation](https://www.projectnomad.us/install).
 
-### Portable / Bootable SSD Setup (Resilience)
-If you're deploying to an external SSD and want persistence + optional immutable root behavior, use the included helper:
+### Configuration SSD portable/amorçable (résilience)
+Si vous effectuez un déploiement sur un SSD externe et souhaitez la persistance + un comportement racine immuable facultatif, utilisez l'assistant inclus :
 ```bash
 sudo bash install/portable_bootable_setup.sh --data-device LABEL=NOMAD_DATA --enable-overlayroot
 ```
-This prepares a BTRFS data mount, migrates `/opt/project-nomad` and `/var/lib/docker` to persistent storage, and keeps compatibility via symlinks.
+Cela prépare un montage de données BTRFS, migre`/opt/project-nomad`et`/var/lib/docker`au stockage persistant et maintient la compatibilité via des liens symboliques.
 
 
-### Advanced Installation
-For more control over the installation process, copy and paste the [Docker Compose template](https://raw.githubusercontent.com/Crosstalk-Solutions/project-nomad/refs/heads/main/install/management_compose.yaml) into a `docker-compose.yml` file and customize it to your liking (be sure to replace any placeholders with your actual values). Then, run `docker compose up -d` to start the Command Center and its dependencies. Note: this method is recommended for advanced users only, as it requires familiarity with Docker and manual configuration before starting.
+### Installation avancée
+Pour plus de contrôle sur le processus d'installation, copiez et collez le [modèle Docker Compose](https://raw.githubusercontent.com/Crosstalk-Solutions/project-nomad/refs/heads/main/install/management_compose.yaml) dans un`docker-compose.yml`et personnalisez-le à votre guise (assurez-vous de remplacer tous les espaces réservés par vos valeurs réelles).Ensuite, courez`docker compose up -d`pour démarrer le Command Center et ses dépendances.Remarque : cette méthode est recommandée uniquement aux utilisateurs avancés, car elle nécessite une familiarité avec Docker et une configuration manuelle avant de démarrer.
 
-## How It Works
-N.O.M.A.D. is a management UI ("Command Center") and API that orchestrates a collection of containerized tools and resources via [Docker](https://www.docker.com/). It handles installation, configuration, and updates for everything — so you don't have to.
+## Comment ça marche
+NOMADE.est une interface utilisateur de gestion (« Command Center ») et une API qui orchestre une collection d'outils et de ressources conteneurisés via [Docker](https://www.docker.com/).Il gère l'installation, la configuration et les mises à jour pour tout, pour que vous n'ayez pas à le faire.
 
-**Built-in capabilities include:**
-- **AI Chat with Knowledge Base** — local AI chat powered by [Ollama](https://ollama.com/) or you can use OpenAI API compatible software such as LM Studio or llama.cpp, with document upload and semantic search (RAG via [Qdrant](https://qdrant.tech/))
-- **Information Library** — offline Wikipedia, medical references, ebooks, and more via [Kiwix](https://kiwix.org/)
-- **Education Platform** — Khan Academy courses with progress tracking via [Kolibri](https://learningequality.org/kolibri/)
-- **Offline Maps** — downloadable regional maps via [ProtoMaps](https://protomaps.com)
-- **Data Tools** — encryption, encoding, and analysis via [CyberChef](https://gchq.github.io/CyberChef/)
-- **Notes** — local note-taking via [FlatNotes](https://github.com/dullage/flatnotes)
-- **System Benchmark** — hardware scoring with a [community leaderboard](https://benchmark.projectnomad.us)
-- **Easy Setup Wizard** — guided first-time configuration with curated content collections
+**Les fonctionnalités intégrées incluent :**
+- **Chat IA avec base de connaissances** : chat IA local alimenté par [Ollama](https://ollama.com/) ou vous pouvez utiliser un logiciel compatible avec l'API OpenAI tel que LM Studio ou llama.cpp, avec téléchargement de documents et recherche sémantique (RAG via [Qdrant](https://qdrant.tech/))
+- **Bibliothèque d'informations** — Wikipédia hors ligne, références médicales, ebooks et bien plus encore via [Kiwix](https://kiwix.org/)
+- **Plateforme éducative** — Cours Khan Academy avec suivi des progrès via [Kolibri](https://learningequality.org/kolibri/)
+- **Cartes hors ligne** — cartes régionales téléchargeables via [ProtoMaps](https://protomaps.com)
+- **Outils de données** — cryptage, encodage et analyse via [CyberChef](https://gchq.github.io/CyberChef/)
+- **Notes** — prise de notes locale via [FlatNotes](https://github.com/dullage/flatnotes)
+- **System Benchmark** — notation du matériel avec un [classement communautaire](https://benchmark.projectnomad.us)
+- **Assistant de configuration facile** : première configuration guidée avec des collections de contenu organisées
 
-N.O.M.A.D. also includes built-in tools like a Wikipedia content selector, ZIM library manager, and content explorer.
+NOMADE.comprend également des outils intégrés tels qu'un sélecteur de contenu Wikipédia, un gestionnaire de bibliothèque ZIM et un explorateur de contenu.
 
-## What's Included
+## Ce qui est inclus
 
-| Capability | Powered By | What You Get |
+|Capacité |Propulsé par |Ce que vous obtenez |
 |-----------|-----------|-------------|
-| Information Library | Kiwix | Offline Wikipedia, medical references, survival guides, ebooks |
-| AI Assistant | Ollama + Qdrant | Built-in chat with document upload and semantic search |
-| Education Platform | Kolibri | Khan Academy courses, progress tracking, multi-user support |
-| Offline Maps | ProtoMaps | Downloadable regional maps with search and navigation |
-| Data Tools | CyberChef | Encryption, encoding, hashing, and data analysis |
-| Notes | FlatNotes | Local note-taking with markdown support |
-| System Benchmark | Built-in | Hardware scoring, Builder Tags, and community leaderboard |
+|Bibliothèque d'informations |Kiwix |Wikipédia hors ligne, références médicales, guides de survie, ebooks |
+|Assistant IA |Ollama + Qdrant |Chat intégré avec téléchargement de documents et recherche sémantique |
+|Plateforme éducative |Kolibri |Cours Khan Academy, suivi des progrès, support multi-utilisateurs |
+|Cartes hors ligne |ProtoMaps |Cartes régionales téléchargeables avec recherche et navigation |
+|Outils de données |CyberChef |Chiffrement, codage, hachage et analyse de données |
+|Remarques |Notes plates |Prise de notes locale avec prise en charge des démarques |
+|Évaluation du système |Intégré |Notation du matériel, balises de constructeur et classement de la communauté |
 
-## Device Requirements
-While many similar offline survival computers are designed to be run on bare-minimum, lightweight hardware, Project N.O.M.A.D. is quite the opposite. To install and run the
-available AI tools, we highly encourage the use of a beefy, GPU-backed device to make the most of your install.
+## Configuration requise pour l'appareil
+Alors que de nombreux ordinateurs de survie hors ligne similaires sont conçus pour fonctionner sur du matériel léger et minimal, le projet N.O.M.A.D.c'est tout le contraire.Pour installer et exécuter le
+outils d'IA disponibles, nous encourageons fortement l'utilisation d'un appareil robuste soutenu par GPU pour tirer le meilleur parti de votre installation.
 
-At it's core, however, N.O.M.A.D. is still very lightweight. For a barebones installation of the management application itself, the following minimal specs are required:
+Cependant, à la base, N.O.M.A.D.est encore très léger.Pour une installation barebones de l’application de gestion elle-même, les spécifications minimales suivantes sont requises :
 
-*Note: Project N.O.M.A.D. is not sponsored by any hardware manufacturer and is designed to be as hardware-agnostic as possible. The harware listed below is for example/comparison use only*
+*Remarque : le projet N.O.M.A.D.n'est sponsorisé par aucun fabricant de matériel et est conçu pour être aussi indépendant que possible du matériel.Le matériel répertorié ci-dessous est uniquement à titre d'exemple/de comparaison*
 
-#### Minimum Specs
-- Processor: 2 GHz dual-core processor or better
-- RAM: 4GB system memory
-- Storage: At least 5 GB free disk space
-- OS: Debian-based (Ubuntu recommended)
-- Stable internet connection (required during install only)
+#### Spécifications minimales
+- Processeur : processeur dual-core 2 GHz ou supérieur
+- RAM : 4 Go de mémoire système
+- Stockage : au moins 5 Go d'espace disque libre
+- Système d'exploitation : basé sur Debian (Ubuntu recommandé)
+- Connexion Internet stable (requise lors de l'installation uniquement)
 
-To run LLM's and other included AI tools:
+Pour exécuter des LLM et d’autres outils d’IA :
 
-#### Optimal Specs
-- Processor: AMD Ryzen 7 or Intel Core i7 or better
-- RAM: 32 GB system memory
-- Graphics: NVIDIA RTX 3060 or AMD equivalent or better (more VRAM = run larger models)
-- Storage: At least 250 GB free disk space (preferably on SSD)
-- OS: Debian-based (Ubuntu recommended)
-- Stable internet connection (required during install only)
+#### Spécifications optimales
+- Processeur : AMD Ryzen 7 ou Intel Core i7 ou supérieur
+- RAM : 32 Go de mémoire système
+- Graphiques : NVIDIA RTX 3060 ou équivalent AMD ou supérieur (plus de VRAM = exécuter des modèles plus grands)
+- Stockage : Au moins 250 Go d'espace disque libre (de préférence sur SSD)
+- Système d'exploitation : basé sur Debian (Ubuntu recommandé)
+- Connexion Internet stable (requise lors de l'installation uniquement)
 
-**For detailed build recommendations at three price points ($150–$1,000+), see the [Hardware Guide](https://www.projectnomad.us/hardware).**
+**Pour des recommandations de construction détaillées à trois niveaux de prix (150 $ à 1 000 $ et plus), consultez le [Guide du matériel](https://www.projectnomad.us/hardware).**
 
-Again, Project N.O.M.A.D. itself is quite lightweight - it's the tools and resources you choose to install with N.O.M.A.D. that will determine the specs required for your unique deployment
+Encore une fois, le projet N.O.M.A.D.lui-même est assez léger - ce sont les outils et les ressources que vous choisissez d'installer avec N.O.M.A.D.qui déterminera les spécifications requises pour votre déploiement unique
 
-#### Running AI models on a different host
-By default, N.O.M.A.D.'s installer will attempt to setup Ollama on the host when the AI Assistant is installed. However, if you would like to run the AI model on a different host, you can go to the settings of of the AI assistant and input a URL for either an ollama or OpenAI-compatible API server (such as LM Studio).  
-Note that if you use Ollama on a different host, you must start the server with this option `OLLAMA_HOST=0.0.0.0`.  
-Ollama is the preferred way to use the AI assistant as it has features such as model download that OpenAI API does not support. So when using LM Studio for example, you will have to use LM Studio to download models.
-You are responsible for the setup of Ollama/OpenAI server on the other host.
+#### Exécuter des modèles d'IA sur un autre hôte
+Par défaut, le programme d'installation de N.O.M.A.D. tentera de configurer Ollama sur l'hôte lorsque l'AI Assistant est installé.Cependant, si vous souhaitez exécuter le modèle IA sur un autre hôte, vous pouvez accéder aux paramètres de l'assistant IA et saisir une URL pour un serveur API ollama ou compatible OpenAI (tel que LM Studio).
+Notez que si vous utilisez Ollama sur un autre hôte, vous devez démarrer le serveur avec cette option`OLLAMA_HOST=0.0.0.0`.
+Ollama est le moyen préféré d'utiliser l'assistant IA car il possède des fonctionnalités telles que le téléchargement de modèles que l'API OpenAI ne prend pas en charge.Ainsi, lorsque vous utilisez LM Studio par exemple, vous devrez utiliser LM Studio pour télécharger des modèles.
+Vous êtes responsable de la configuration du serveur Ollama/OpenAI sur l'autre hôte.
 
-## Frequently Asked Questions (FAQ)
-For answers to common questions about Project N.O.M.A.D., please see our [FAQ](FAQ.md) page.
+## Foire aux questions (FAQ)
+Pour obtenir des réponses aux questions courantes sur le projet N.O.M.A.D., veuillez consulter notre page [FAQ](FAQ.md).
 
-## About Internet Usage & Privacy
-Project N.O.M.A.D. is designed for offline usage. An internet connection is only required during the initial installation (to download dependencies) and if you (the user) decide to download additional tools and resources at a later time. Otherwise, N.O.M.A.D. does not require an internet connection and has ZERO built-in telemetry.
+## À propos de l'utilisation d'Internet et de la confidentialité
+Projet N.O.M.A.D.est conçu pour une utilisation hors ligne.Une connexion Internet n'est requise que lors de l'installation initiale (pour télécharger les dépendances) et si vous (l'utilisateur) décidez de télécharger des outils et des ressources supplémentaires ultérieurement.Sinon, N.O.M.A.D.ne nécessite pas de connexion Internet et dispose de télémétrie intégrée ZÉRO.
 
-To test internet connectivity, N.O.M.A.D. attempts to make a request to Cloudflare's utility endpoint, `https://1.1.1.1/cdn-cgi/trace` and checks for a successful response.
+Pour tester la connectivité Internet, N.O.M.A.D.tente de faire une requête au point de terminaison de l'utilitaire de Cloudflare,`https://1.1.1.1/cdn-cgi/trace`et vérifie une réponse réussie.
 
-## About Security
-By design, Project N.O.M.A.D. is intended to be open and available without hurdles - it includes no authentication. If you decide to connect your device to a local network after install (e.g. for allowing other devices to access it's resources), you can block/open ports to control which services are exposed.
+## À propos de la sécurité
+De par sa conception, le projet N.O.M.A.D.est destiné à être ouvert et disponible sans obstacles - il n'inclut aucune authentification.Si vous décidez de connecter votre appareil à un réseau local après l'installation (par exemple pour permettre à d'autres appareils d'accéder à ses ressources), vous pouvez bloquer/ouvrir des ports pour contrôler quels services sont exposés.
 
-**Will authentication be added in the future?** Maybe. It's not currently a priority, but if there's enough demand for it, we may consider building in an optional authentication layer in a future release to support uses cases where multiple users need access to the same instance but with different permission levels (e.g. family use with parental controls, classroom use with teacher/admin accounts, etc.). We have a suggestion for this on our public roadmap, so if this is something you'd like to see, please upvote it here: https://roadmap.projectnomad.us/posts/1/user-authentication-please-build-in-user-auth-with-admin-user-roles
+**L'authentification sera-t-elle ajoutée à l'avenir ?** Peut-être.Ce n'est pas actuellement une priorité, mais s'il y a suffisamment de demande, nous pourrions envisager de créer une couche d'authentification facultative dans une prochaine version pour prendre en charge les cas d'utilisation où plusieurs utilisateurs ont besoin d'accéder à la même instance mais avec des niveaux d'autorisation différents (par exemple, utilisation familiale avec contrôle parental, utilisation en classe avec des comptes enseignant/administrateur, etc.).Nous avons une suggestion à ce sujet sur notre feuille de route publique, donc si c'est quelque chose que vous aimeriez voir, veuillez voter ici : https://roadmap.projectnomad.us/posts/1/user-authentication-please-build-in-user-auth-with-admin-user-roles
 
-For now, we recommend using network-level controls to manage access if you're planning to expose your N.O.M.A.D. instance to other devices on a local network. N.O.M.A.D. is not designed to be exposed directly to the internet, and we strongly advise against doing so unless you really know what you're doing, have taken appropriate security measures, and understand the risks involved.
+Pour l'instant, nous vous recommandons d'utiliser des contrôles au niveau du réseau pour gérer l'accès si vous envisagez d'exposer votre N.O.M.A.D.exemple vers d’autres appareils sur un réseau local.NOMADE.n'est pas conçu pour être exposé directement à Internet, et nous vous déconseillons fortement de le faire à moins que vous sachiez vraiment ce que vous faites, que vous ayez pris les mesures de sécurité appropriées et que vous compreniez les risques encourus.
 
-## Contributing
-Contributions are welcome and appreciated! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to contribute to the project.
+## Contribuer
+Les contributions sont les bienvenues et appréciées !Veuillez consulter [CONTRIBUTING.md](CONTRIBUTING.md) pour obtenir des directives sur la manière de contribuer au projet.
 
-## Community & Resources
+## Communauté et ressources
 
-- **Website:** [www.projectnomad.us](https://www.projectnomad.us) - Learn more about the project
-- **Discord:** [Join the Community](https://discord.com/invite/crosstalksolutions) - Get help, share your builds, and connect with other NOMAD users
-- **Benchmark Leaderboard:** [benchmark.projectnomad.us](https://benchmark.projectnomad.us) - See how your hardware stacks up against other NOMAD builds
-- **Troubleshooting Guide:** [TROUBLESHOOTING.md](TROUBLESHOOTING.md) - Find solutions to common issues
-- **FAQ:** [FAQ.md](FAQ.md) - Find answers to frequently asked questions
+- **Site Web :** [www.projectnomad.us](https://www.projectnomad.us) - En savoir plus sur le projet
+- **Discord :** [Rejoignez la communauté](https://discord.com/invite/crosstalksolutions) - Obtenez de l'aide, partagez vos builds et connectez-vous avec d'autres utilisateurs NOMAD
+- **Classement de référence :** [benchmark.projectnomad.us](https://benchmark.projectnomad.us) - Découvrez comment votre matériel se compare aux autres versions de NOMAD
+- **Guide de dépannage :** [TROUBLESHOOTING.md](TROUBLESHOOTING.md) - Trouvez des solutions aux problèmes courants
+- **FAQ :** [FAQ.md](FAQ.md) - Trouvez les réponses aux questions fréquemment posées
 
-## License
+## Licence
 
-Project N.O.M.A.D. is licensed under the [Apache License 2.0](LICENSE).
+Projet N.O.M.A.D.est sous licence [Apache License 2.0](LICENSE).
 
-## Helper Scripts
-Once installed, Project N.O.M.A.D. has a few helper scripts should you ever need to troubleshoot issues or perform maintenance that can't be done through the Command Center. All of these scripts are found in Project N.O.M.A.D.'s install directory, `/opt/project-nomad`
+## Scripts d'aide
+Une fois installé, Project N.O.M.A.D.propose quelques scripts d'assistance si jamais vous avez besoin de résoudre des problèmes ou d'effectuer une maintenance qui ne peut pas être effectuée via le centre de commande.Tous ces scripts se trouvent dans le répertoire d'installation du Projet N.O.M.A.D.,`/opt/project-nomad`
 
 ###
 
-###### Start Script - Starts all installed project containers
+###### Démarrer le script - Démarre tous les conteneurs de projet installés
 ```bash
 sudo bash /opt/project-nomad/start_nomad.sh
 ```
 ###
 
-###### Stop Script - Stops all installed project containers
+###### Stop Script - Arrête tous les conteneurs de projet installés
 ```bash
 sudo bash /opt/project-nomad/stop_nomad.sh
 ```
 ###
 
-###### Update Script - Attempts to pull the latest images for the Command Center and its dependencies (i.e. mysql) and recreate the containers. Note: this *only* updates the Command Center containers. It does not update the installable application containers - that should be done through the Command Center UI
+###### Script de mise à jour : tente d'extraire les dernières images du centre de commande et de ses dépendances (c'est-à-dire mysql) et de recréer les conteneurs.Remarque : ceci *uniquement* met à jour les conteneurs du Command Center.Il ne met pas à jour les conteneurs d'applications installables - cela doit être fait via l'interface utilisateur du Command Center
 ```bash
 sudo bash /opt/project-nomad/update_nomad.sh
 ```
 
-###### Uninstall Script - Need to start fresh? Use the uninstall script to make your life easy. Note: this cannot be undone!
+###### Script de désinstallation – Besoin de recommencer à zéro ?Utilisez le script de désinstallation pour vous faciliter la vie.Attention : cela ne peut pas être annulé !
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Crosstalk-Solutions/project-nomad/refs/heads/main/install/uninstall_nomad.sh -o uninstall_nomad.sh && sudo bash uninstall_nomad.sh
 ```
