@@ -1,83 +1,74 @@
-# Welcome to Project N.O.M.A.D.
+# Bienvenue sur Project N.O.M.A.D.
 
-Your personal offline knowledge server is ready to use.
+Votre serveur personnel de connaissances hors ligne est prêt.
 
-## What is N.O.M.A.D.?
+## Qu'est-ce que N.O.M.A.D. ?
 
-**N.O.M.A.D.** stands for **Node for Offline Media, Archives, and Data**. It's your personal server for accessing knowledge, education, and AI assistance — even when you have no internet connection.
+**N.O.M.A.D.** signifie **Node for Offline Media, Archives, and Data**. C'est votre serveur personnel pour accéder à des contenus de connaissance, d'éducation et d'IA, même sans connexion Internet.
 
-Think of it as having Wikipedia, Khan Academy, an AI assistant, and offline maps all in one place, running on hardware you control.
+![Tableau de bord Command Center](/docs/dashboard.webp)
 
-![Command Center Dashboard](/docs/dashboard.webp)
+## Que pouvez-vous faire ?
 
-## What Can You Do?
+### Explorer des contenus hors ligne
+Accédez localement à Wikipedia, à des références médicales, à des guides pratiques et à des ebooks.
 
-### Browse Offline Knowledge
-Access millions of Wikipedia articles, medical references, how-to guides, and ebooks — all stored locally on your server. No internet required.
+### Apprendre
+Utilisez des contenus pédagogiques (notamment Khan Academy) avec vidéos et exercices.
 
-*Launch the Information Library from the home screen or the [Apps](/settings/apps) page.*
+### Discuter avec l'IA
+Posez des questions et obtenez des réponses contextualisées. Vous pouvez aussi téléverser des documents dans la base de connaissance.
 
-### Learn Something New
-Khan Academy courses covering math, science, economics, and more. Complete with videos and exercises, all available offline.
+**[Ouvrir le chat IA →](/chat)**
 
-*Launch the Education Platform from the home screen or the [Apps](/settings/apps) page.*
+### Téléverser des documents
+Ajoutez des PDF ou des fichiers texte pour enrichir les réponses de l'assistant.
 
-### Chat with AI
-Ask questions, get explanations, brainstorm ideas, or get help with writing. Your local AI assistant works completely offline — and you can upload documents to the Knowledge Base for document-aware responses.
+**[Ouvrir la base de connaissance →](/knowledge-base)**
 
-**[Open AI Chat →](/chat)**
+### Utiliser des cartes hors ligne
+Téléchargez les régions nécessaires puis naviguez sans Internet.
 
-### Upload Documents to the Knowledge Base
-Upload PDFs, text files, and other documents for the AI to reference. The Knowledge Base uses semantic search to find relevant information from your uploaded documents when you ask questions.
+**[Ouvrir les cartes →](/maps)**
 
-**[Open Knowledge Base →](/knowledge-base)**
+### Benchmark matériel
+Mesurez les performances de votre matériel et comparez votre score avec la communauté.
 
-### View Offline Maps
-Navigate and explore maps without an internet connection. Download regions you need before going offline.
-
-**[Open Maps →](/maps)**
-
-### Benchmark Your Hardware
-Run a System Benchmark to see how your hardware performs and compare your NOMAD Score with the community leaderboard.
-
-**[Open Benchmark →](/settings/benchmark)**
+**[Ouvrir le benchmark →](/settings/benchmark)**
 
 ---
 
-## Getting Started
+## Démarrage
 
-**New to N.O.M.A.D.?** Use the Easy Setup wizard to configure your server and download content collections.
+Nouveau sur N.O.M.A.D. ? Lancez l'assistant de configuration.
 
-**[Run Easy Setup →](/easy-setup)**
+**[Lancer Easy Setup →](/easy-setup)**
 
-Or explore the **[Getting Started Guide](/docs/getting-started)** for a walkthrough of all features.
+Ou consultez le **[guide de démarrage](/docs/getting-started)**.
 
 ---
 
-## Quick Links
+## Liens rapides
 
-| I want to... | Go here |
+| Je veux... | Aller ici |
 |--------------|---------|
-| Chat with the AI | [AI Chat →](/chat) |
-| Upload documents for AI | [Knowledge Base →](/knowledge-base) |
-| Download more content | [Install Apps →](/settings/apps) |
-| Add Wikipedia/reference content | [Content Explorer →](/settings/zim/remote-explorer) |
-| Manage installed content | [Content Manager →](/settings/zim) |
-| Download map regions | [Maps Manager →](/settings/maps) |
-| Run a benchmark | [System Benchmark →](/settings/benchmark) |
-| Check for updates | [System Update →](/settings/update) |
-| View system status | [System Info →](/settings/system) |
+| Discuter avec l'IA | [Chat IA →](/chat) |
+| Téléverser des documents | [Base de connaissance →](/knowledge-base) |
+| Installer du contenu | [Applications →](/settings/apps) |
+| Gérer Wikipedia/références | [Explorateur de contenu →](/settings/zim/remote-explorer) |
+| Gérer le contenu installé | [Gestionnaire de contenu →](/settings/zim) |
+| Télécharger des cartes | [Gestionnaire de cartes →](/settings/maps) |
+| Lancer un benchmark | [Benchmark système →](/settings/benchmark) |
+| Vérifier les mises à jour | [Mise à jour système →](/settings/update) |
+| Voir l'état système | [Infos système →](/settings/system) |
 
 ---
 
-## Keeping Your Server Updated
+## Maintenir le serveur à jour
 
-N.O.M.A.D. works best when kept up to date while you have internet access. This ensures you have the latest:
-- Software features and bug fixes
-- Wikipedia and reference content
-- Educational materials
-- AI model improvements
+Mettez à jour votre serveur lorsque vous avez Internet pour conserver :
+- les dernières fonctionnalités,
+- les correctifs,
+- les contenus les plus récents.
 
-When you go offline, you'll have everything you need — the last synced versions of all your content.
-
-**[Check for Updates →](/settings/update)**
+**[Vérifier les mises à jour →](/settings/update)**
