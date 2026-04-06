@@ -1,0 +1,20 @@
+🛡️ Project N.O.M.A.D. - Resilience EditionNode for Offline Media, Archives, and Data (Version Bootable & Immuable)Ce fork du projet original de Crosstalk Solutions est optimisé pour transformer un SSD externe de 500 Go en une "Arche de Savoir" totalement autonome, résistante aux pannes de courant et capable de booter sur n'importe quel PC.🌟 Pourquoi cette version ?L'objectif est la résilience ultime. Contrairement à une installation classique sur serveur, cette version est :Portable : Emportez toute la connaissance humaine dans votre poche.Immuable : Le système d'exploitation (OS) est figé en lecture seule via overlayroot. Aucune corruption possible en cas d'extinction brutale.Persistante : Une partition dédiée (BTRFS) permet d'ajouter des fichiers, d'indexer des documents via RAG et de faire évoluer l'IA.Durable : Paramétrages spécifiques pour minimiser l'usure des cellules flash du SSD.🛠️ Architecture du SSD (500 Go)PartitionTailleSystème de fichiersRôleEFI512 MoFAT32Amorçage universel (Boot).System40 GoExt4 (RO)Debian + Docker (Le "Cerveau").Data~410 GoBTRFS (RW)Archives, Modèles IA, Cartes, Médias.Provision~50 GoUnallocatedEspace vide pour prolonger la vie du SSD.🚀 Guide d'installation rapide1. Préparation de l'OSTéléchargez l'ISO Debian 12 Netinst.Flashez-la sur une clé USB avec Rufus.Bootez sur la clé et installez Debian sur votre SSD (Partition de 40 Go).Note : N'installez pas d'interface graphique pour maximiser la RAM disponible pour l'IA.2. Configuration de la résilienceUne fois le système installé, exécutez ces commandes :Bash# Installation des dépendances
+sudo apt update && sudo apt install docker.io docker-compose git overlayroot -y
+
+# Configuration de l'immuabilité
+sudo nano /etc/overlayroot.conf
+# Modifier la ligne : overlayroot="tmpfs:recurse=0"
+
+# Montage optimisé de la partition DATA
+sudo nano /etc/fstab
+# Ajoutez ces options à votre partition BTRFS :
+# noatime,commit=60,compress=zstd:3,errors=remount-ro
+3. Déploiement de NOMADBashcd /mnt/nomad_data
+git clone https://github.com/[TON_NOM_UTILISATEUR]/project-nomad-resilience.git
+cd project-nomad-resilience
+docker-compose up -d
+🧠 Utilisation & MaintenanceMode Lecture Seule (Défaut)Le système démarre dans un état figé. Vous pouvez tester n'hui importe quelle commande, installer des paquets temporaires : au redémarrage, tout revient à l'état initial. Seules les données dans /mnt/nomad_data sont sauvegardées.Mode Maintenance (Mise à jour)Pour modifier l'OS ou installer de nouveaux outils Docker de façon permanente :Bashsudo overlayroot-chroot
+# Faites vos modifications (ex: apt upgrade)
+exit
+sudo reboot
+Enrichissement des donnéesAjoutez vos documents dans le dossier data/. L'IA (via Ollama et le RAG intégré) pourra alors les scanner et répondre à vos questions en se basant sur vos propres archives locales.📋 Prérequis Matériels recommandésSupport : SSD NVMe externe (Boîtier USB 3.1 minimum).RAM : 8 Go minimum (16 Go recommandé pour les gros modèles d'IA).CPU : Processeur x86 récent avec support AVX2.⚖️ Licence & CréditsCe projet est un fork basé sur le travail exceptionnel de Crosstalk Solutions.Licence : MIT (ou celle du projet original).
