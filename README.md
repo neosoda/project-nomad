@@ -34,6 +34,14 @@ Project N.O.M.A.D. is now installed on your device! Open a browser and navigate 
 
 For a complete step-by-step walkthrough (including Ubuntu installation), see the [Installation Guide](https://www.projectnomad.us/install).
 
+### Portable / Bootable SSD Setup (Resilience)
+If you're deploying to an external SSD and want persistence + optional immutable root behavior, use the included helper:
+```bash
+sudo bash install/portable_bootable_setup.sh --data-device LABEL=NOMAD_DATA --enable-overlayroot
+```
+This prepares a BTRFS data mount, migrates `/opt/project-nomad` and `/var/lib/docker` to persistent storage, and keeps compatibility via symlinks.
+
+
 ### Advanced Installation
 For more control over the installation process, copy and paste the [Docker Compose template](https://raw.githubusercontent.com/Crosstalk-Solutions/project-nomad/refs/heads/main/install/management_compose.yaml) into a `docker-compose.yml` file and customize it to your liking (be sure to replace any placeholders with your actual values). Then, run `docker compose up -d` to start the Command Center and its dependencies. Note: this method is recommended for advanced users only, as it requires familiarity with Docker and manual configuration before starting.
 
