@@ -42,13 +42,13 @@ export default function ChatSidebar({
     <div className="w-64 bg-surface-secondary border-r border-border-subtle flex flex-col h-full">
       <div className="p-4 border-b border-border-subtle h-[75px] flex items-center justify-center">
         <StyledButton onClick={onNewChat} icon="IconPlus" variant="primary" fullWidth>
-          New Chat
+          Nouveau chat
         </StyledButton>
       </div>
 
       <div className="flex-1 overflow-y-auto">
         {sessions.length === 0 ? (
-          <div className="p-4 text-center text-text-muted text-sm">No previous chats</div>
+          <div className="p-4 text-center text-text-muted text-sm">Aucun chat précédent</div>
         ) : (
           <div className="p-2 space-y-1">
             {sessions.map((session) => (
@@ -89,7 +89,7 @@ export default function ChatSidebar({
         )}
       </div>
       <div className="p-4 flex flex-col items-center justify-center gap-y-2">
-        <img src="/project_nomad_logo.webp" alt="Project Nomad Logo" className="h-28 w-28 mb-6" />
+        <img src="/project_nomad_logo.webp" alt="Logo Project Nomad" className="h-28 w-28 mb-6" />
         <StyledButton
           onClick={() => {
             if (isInModal) {
@@ -103,7 +103,7 @@ export default function ChatSidebar({
           size="sm"
           fullWidth
         >
-          {isInModal ? 'Open in New Tab' : 'Back to Home'}
+          {isInModal ? 'Ouvrir dans un nouvel onglet' : 'Retour à l’accueil'}
         </StyledButton>
         <StyledButton
           onClick={() => {
@@ -114,7 +114,7 @@ export default function ChatSidebar({
           size="sm"
           fullWidth
         >
-          Models & Settings
+          Modèles et paramètres
         </StyledButton>
         <StyledButton
           onClick={() => {
@@ -125,7 +125,7 @@ export default function ChatSidebar({
           size="sm"
           fullWidth
         >
-          Knowledge Base
+          Base de connaissance
         </StyledButton>
         {sessions.length > 0 && (
           <StyledButton
@@ -135,7 +135,7 @@ export default function ChatSidebar({
             size="sm"
             fullWidth
           >
-            Clear History
+            Effacer l’historique
           </StyledButton>
         )}
       </div>

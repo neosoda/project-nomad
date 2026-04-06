@@ -109,7 +109,7 @@ export default function Chat({
       const assistantMessage: ChatMessage = {
         id: `msg-${Date.now()}-assistant`,
         role: 'assistant',
-        content: data.message?.content || 'Sorry, I could not generate a response.',
+        content: data.message?.content || 'Désolé, je n’ai pas pu générer de réponse.',
         timestamp: new Date(),
       }
 
@@ -124,7 +124,7 @@ export default function Chat({
       const errorMessage: ChatMessage = {
         id: `msg-${Date.now()}-error`,
         role: 'assistant',
-        content: 'Sorry, there was an error processing your request. Please try again.',
+        content: 'Désolé, une erreur est survenue pendant le traitement de votre demande. Veuillez réessayer.',
         timestamp: new Date(),
       }
       setMessages((prev) => [...prev, errorMessage])
@@ -159,17 +159,16 @@ export default function Chat({
   const handleClearHistory = useCallback(() => {
     openModal(
       <StyledModal
-        title="Clear All Chat History?"
+        title="Effacer tout l’historique des chats ?"
         onConfirm={() => deleteAllSessionsMutation.mutate()}
         onCancel={closeAllModals}
         open={true}
-        confirmText="Clear All"
-        cancelText="Cancel"
+        confirmText="Tout effacer"
+        cancelText="Annuler"
         confirmVariant="danger"
       >
         <p className="text-text-primary">
-          Are you sure you want to delete all chat sessions? This action cannot be undone and all
-          conversations will be permanently deleted.
+          Voulez-vous vraiment supprimer toutes les sessions de chat ? Cette action est définitive et toutes les conversations seront supprimées.
         </p>
       </StyledModal>,
       'confirm-clear-history-modal'
@@ -211,7 +210,7 @@ export default function Chat({
 
       // Create a new session if none exists
       if (!sessionId) {
-        const newSession = await api.createChatSession('New Chat', selectedModel)
+        const newSession = await api.createChatSession('Nouveau chat', selectedModel)
         if (newSession) {
           sessionId = newSession.id
           setActiveSessionId(sessionId)
@@ -315,7 +314,7 @@ export default function Chat({
                 {
                   id: assistantMsgId,
                   role: 'assistant',
-                  content: 'Sorry, there was an error processing your request. Please try again.',
+                  content: 'Désolé, une erreur est survenue pendant le traitement de votre demande. Veuillez réessayer.',
                   timestamp: new Date(),
                 },
               ]
@@ -368,7 +367,7 @@ export default function Chat({
       <div className="flex-1 flex flex-col min-h-0">
         <div className="px-6 py-3 border-b border-border-subtle bg-surface-secondary flex items-center justify-between h-[75px] flex-shrink-0">
           <h2 className="text-lg font-semibold text-text-primary">
-            {activeSession?.title || 'New Chat'}
+            {activeSession?.title || 'Nouveau chat'}
           </h2>
           <div className="flex items-center gap-4">
             {remoteOllamaUrlSetting?.value && (
