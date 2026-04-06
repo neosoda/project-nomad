@@ -1,20 +1,108 @@
-🛡️ Project N.O.M.A.D. - Resilience EditionNode for Offline Media, Archives, and Data (Version Bootable & Immuable)Ce fork du projet original de Crosstalk Solutions est optimisé pour transformer un SSD externe de 500 Go en une "Arche de Savoir" totalement autonome, résistante aux pannes de courant et capable de booter sur n'importe quel PC.🌟 Pourquoi cette version ?L'objectif est la résilience ultime. Contrairement à une installation classique sur serveur, cette version est :Portable : Emportez toute la connaissance humaine dans votre poche.Immuable : Le système d'exploitation (OS) est figé en lecture seule via overlayroot. Aucune corruption possible en cas d'extinction brutale.Persistante : Une partition dédiée (BTRFS) permet d'ajouter des fichiers, d'indexer des documents via RAG et de faire évoluer l'IA.Durable : Paramétrages spécifiques pour minimiser l'usure des cellules flash du SSD.🛠️ Architecture du SSD (500 Go)PartitionTailleSystème de fichiersRôleEFI512 MoFAT32Amorçage universel (Boot).System40 GoExt4 (RO)Debian + Docker (Le "Cerveau").Data~410 GoBTRFS (RW)Archives, Modèles IA, Cartes, Médias.Provision~50 GoUnallocatedEspace vide pour prolonger la vie du SSD.🚀 Guide d'installation rapide1. Préparation de l'OSTéléchargez l'ISO Debian 12 Netinst.Flashez-la sur une clé USB avec Rufus.Bootez sur la clé et installez Debian sur votre SSD (Partition de 40 Go).Note : N'installez pas d'interface graphique pour maximiser la RAM disponible pour l'IA.2. Configuration de la résilienceUne fois le système installé, exécutez ces commandes :Bash# Installation des dépendances
-sudo apt update && sudo apt install docker.io docker-compose git overlayroot -y
+🛡️ Project N.O.M.A.D. — Mode Bootable & Portable (Résilience)
 
-# Configuration de l'immuabilité
-sudo nano /etc/overlayroot.conf
-# Modifier la ligne : overlayroot="tmpfs:recurse=0"
+Objectif: transformer un SSD externe en plateforme NOMAD portable, bootable sur différents PC, et robuste aux coupures électriques.
 
-# Montage optimisé de la partition DATA
-sudo nano /etc/fstab
-# Ajoutez ces options à votre partition BTRFS :
-# noatime,commit=60,compress=zstd:3,errors=remount-ro
-3. Déploiement de NOMADBashcd /mnt/nomad_data
-git clone https://github.com/[TON_NOM_UTILISATEUR]/project-nomad-resilience.git
-cd project-nomad-resilience
-docker-compose up -d
-🧠 Utilisation & MaintenanceMode Lecture Seule (Défaut)Le système démarre dans un état figé. Vous pouvez tester n'hui importe quelle commande, installer des paquets temporaires : au redémarrage, tout revient à l'état initial. Seules les données dans /mnt/nomad_data sont sauvegardées.Mode Maintenance (Mise à jour)Pour modifier l'OS ou installer de nouveaux outils Docker de façon permanente :Bashsudo overlayroot-chroot
-# Faites vos modifications (ex: apt upgrade)
+⚠️ Limites connues (Inconnu / Risque)
+- La portabilité inter-machines dépend du support matériel (UEFI/BIOS, drivers GPU, contrôleur USB/NVMe).
+- Le mode immuable (`overlayroot`) bloque les changements OS persistants hors partition DATA.
+- La robustesse de l’IA dépend toujours des ressources matérielles (RAM/CPU/GPU).
+
+---
+
+## 1) Architecture disque recommandée (500 Go)
+
+| Partition | Taille | FS | Rôle |
+|---|---:|---|---|
+| EFI | 512 Mo | FAT32 | Boot UEFI |
+| System | 40 Go | ext4 | Debian + runtime (option lecture seule via overlayroot) |
+| Data | ~410 Go | btrfs | Données persistantes NOMAD (RW) |
+| Provision | ~50 Go | non alloué | Over-provisioning SSD |
+
+Recommandation: labelliser la partition DATA en `NOMAD_DATA`.
+
+---
+
+## 2) Installation Debian minimale
+
+- Installer Debian 12 (sans interface graphique) sur la partition System.
+- Activer SSH si administration distante requise.
+- Vérifier que le boot se fait bien depuis le SSD externe.
+
+---
+
+## 3) Préparation portable/bootable automatisée
+
+Ce repo inclut maintenant un script idempotent:
+
+```bash
+sudo bash install/portable_bootable_setup.sh \
+  --data-device LABEL=NOMAD_DATA \
+  --enable-overlayroot
+```
+
+Ce script:
+- monte la partition DATA sur `/mnt/nomad_data` (fstab avec options BTRFS adaptées SSD),
+- migre `/opt/project-nomad` et `/var/lib/docker` vers DATA,
+- crée des symlinks pour conserver la compatibilité avec les scripts existants,
+- active `overlayroot="tmpfs:recurse=0"` si demandé.
+
+---
+
+## 4) Déploiement NOMAD
+
+### Option A — Installation standard NOMAD
+
+```bash
+sudo apt-get update
+sudo apt-get install -y curl
+curl -fsSL https://raw.githubusercontent.com/Crosstalk-Solutions/project-nomad/refs/heads/main/install/install_nomad.sh -o install_nomad.sh
+sudo bash install_nomad.sh
+```
+
+### Option B — Déploiement compose manuel
+
+```bash
+sudo mkdir -p /opt/project-nomad
+sudo cp install/management_compose.yaml /opt/project-nomad/compose.yml
+cd /opt/project-nomad
+# Remplacer les valeurs "replaceme" avant démarrage
+sudo docker compose -f compose.yml up -d
+```
+
+---
+
+## 5) Exploitation quotidienne
+
+### Mode normal (portable)
+- Les données et volumes Docker restent persistants dans DATA.
+- Les scripts `start_nomad.sh` et `stop_nomad.sh` restent valides.
+
+### Mode maintenance (si overlayroot activé)
+```bash
+sudo overlayroot-chroot
+# appliquer les changements système permanents (apt, config, etc.)
 exit
 sudo reboot
-Enrichissement des donnéesAjoutez vos documents dans le dossier data/. L'IA (via Ollama et le RAG intégré) pourra alors les scanner et répondre à vos questions en se basant sur vos propres archives locales.📋 Prérequis Matériels recommandésSupport : SSD NVMe externe (Boîtier USB 3.1 minimum).RAM : 8 Go minimum (16 Go recommandé pour les gros modèles d'IA).CPU : Processeur x86 récent avec support AVX2.⚖️ Licence & CréditsCe projet est un fork basé sur le travail exceptionnel de Crosstalk Solutions.Licence : MIT (ou celle du projet original).
+```
+
+---
+
+## 6) Vérifications post-install
+
+```bash
+mount | grep -E '/mnt/nomad_data|/var/lib/docker|/opt/project-nomad'
+docker ps --format 'table {{.Names}}\t{{.Status}}'
+sudo test -L /var/lib/docker && echo "docker sur DATA: OK"
+sudo test -L /opt/project-nomad && echo "nomad sur DATA: OK"
+```
+
+---
+
+## 7) Améliorations techniques recommandées (priorisées)
+
+1. **Séparer les données NOMAD par service** sur DATA (mysql, redis, storage, models, maps) pour simplifier backup/restauration.
+2. **Sauvegarde BTRFS snapshot** régulière de `/mnt/nomad_data/nomad_persist`.
+3. **Durcir l’auto-montage** avec monitoring (`systemd` + alerte si DATA non montée).
+4. **Ajouter un mode "dry-run"** au script portable pour audit avant modification.
+5. **Documenter un profil de rollback** (restauration fstab + suppression symlinks + remigration locale).
+
