@@ -42,9 +42,9 @@ export default function ChatInterface({
     setIsDownloading(true)
     try {
       await api.downloadModel(DEFAULT_QUERY_REWRITE_MODEL)
-      addNotification({ type: 'success', message: 'Model download queued' })
+      addNotification({ type: 'success', message: 'Téléchargement du modèle mis en file d’attente' })
     } catch (error) {
-      addNotification({ type: 'error', message: 'Failed to queue model download' })
+      addNotification({ type: 'error', message: 'Impossible de mettre le téléchargement du modèle en file d’attente' })
     } finally {
       setIsDownloading(false)
       setDownloadDialogOpen(false)
@@ -91,13 +91,13 @@ export default function ChatInterface({
           <div className="h-full flex items-center justify-center">
             <div className="text-center max-w-md">
               <IconWand className="h-16 w-16 text-desert-green mx-auto mb-4 opacity-50" />
-              <h3 className="text-lg font-medium text-text-primary mb-2">Start a conversation</h3>
+              <h3 className="text-lg font-medium text-text-primary mb-2">Démarrer une conversation</h3>
               <p className="text-text-muted text-sm">
-                Interact with your installed language models directly in the Command Center.
+                Interagissez avec vos modèles de langage installés directement depuis le Centre de commande.
               </p>
               {chatSuggestionsEnabled && chatSuggestions && chatSuggestions.length > 0 && !chatSuggestionsLoading && (
                 <div className="mt-8">
-                  <h4 className="text-sm font-medium text-text-secondary mb-2">Suggestions:</h4>
+                  <h4 className="text-sm font-medium text-text-secondary mb-2">Suggestions :</h4>
                   <div className="flex flex-col gap-2">
                     {chatSuggestions.map((suggestion, index) => (
                       <button
@@ -118,10 +118,10 @@ export default function ChatInterface({
                 </div>
               )}
               {/* Display bouncing dots while loading suggestions */}
-              {chatSuggestionsEnabled && chatSuggestionsLoading && <BouncingDots text="Thinking" containerClassName="mt-8" />}
+              {chatSuggestionsEnabled && chatSuggestionsLoading && <BouncingDots text="Réflexion" containerClassName="mt-8" />}
               {!chatSuggestionsEnabled && (
                 <div className="mt-8 text-sm text-text-muted">
-                  Need some inspiration? Enable chat suggestions in settings to get started with example prompts.
+                  Besoin d’inspiration ? Activez les suggestions dans les paramètres pour commencer avec des exemples de prompts.
                 </div>
               )}
             </div>
@@ -145,7 +145,7 @@ export default function ChatInterface({
               <div className="flex gap-4 justify-start">
                 <ChatAssistantAvatar />
                 <div className="max-w-[70%] rounded-lg px-4 py-3 bg-surface-secondary text-text-primary">
-                  <BouncingDots text="Thinking" />
+                  <BouncingDots text="Réflexion" />
                 </div>
               </div>
             )}
@@ -162,7 +162,7 @@ export default function ChatInterface({
               value={input}
               onChange={handleInput}
               onKeyDown={handleKeyDown}
-              placeholder={`Type your message to ${aiAssistantName}... (Shift+Enter for new line)`}
+              placeholder={`Écrivez votre message à ${aiAssistantName}... (Shift+Entrée pour une nouvelle ligne)`}
               className="w-full resize-none rounded-lg border border-border-default px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-desert-green focus:border-transparent disabled:bg-surface-secondary disabled:text-text-muted"
               rows={1}
               disabled={isLoading}
@@ -188,21 +188,21 @@ export default function ChatInterface({
         </form>
         {!rewriteModelAvailable && (
           <div className="text-sm text-text-muted mt-2">
-            The {DEFAULT_QUERY_REWRITE_MODEL} model is not installed. Consider{' '}
+            Le modèle {DEFAULT_QUERY_REWRITE_MODEL} n’est pas installé. Envisagez de{' '}
             <button
               onClick={() => setDownloadDialogOpen(true)}
               className="text-desert-green underline hover:text-desert-green/80 cursor-pointer"
             >
-              downloading it
+              le télécharger
             </button>{' '}
-            for improved retrieval-augmented generation (RAG) performance.
+            pour améliorer les performances de génération augmentée par récupération (RAG).
           </div>
         )}
         <StyledModal
           open={downloadDialogOpen}
-          title={`Download ${DEFAULT_QUERY_REWRITE_MODEL}?`}
-          confirmText="Download"
-          cancelText="Cancel"
+          title={`Télécharger ${DEFAULT_QUERY_REWRITE_MODEL} ?`}
+          confirmText="Télécharger"
+          cancelText="Annuler"
           confirmIcon='IconDownload'
           confirmVariant='primary'
           confirmLoading={isDownloading}
@@ -211,9 +211,9 @@ export default function ChatInterface({
           onClose={() => setDownloadDialogOpen(false)}
         >
           <p className="text-text-primary">
-            This will dispatch a background download job for{' '}
-            <span className="font-mono font-medium">{DEFAULT_QUERY_REWRITE_MODEL}</span> and may take some time to complete. The model
-            will be used to rewrite queries for improved RAG retrieval performance. Note that download is only supported when using Ollama. If using an OpenAI API interface, please download the model with that software.
+            Cela va lancer un téléchargement en arrière-plan pour{' '}
+            <span className="font-mono font-medium">{DEFAULT_QUERY_REWRITE_MODEL}</span>. Le traitement peut prendre du temps. Ce modèle
+            sera utilisé pour réécrire les requêtes et améliorer la récupération RAG. Le téléchargement intégré est disponible uniquement avec Ollama ; avec une API OpenAI compatible, téléchargez le modèle via ce logiciel.
           </p>
         </StyledModal>
       </div>

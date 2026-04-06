@@ -16,56 +16,56 @@ import { useSystemSetting } from '~/hooks/useSystemSetting'
 import Alert from '~/components/Alert'
 import { SERVICE_NAMES } from '../../constants/service_names'
 
-// Maps is a Core Capability (display_order: 4)
+// Cartes : capacité cœur (display_order: 4)
 const MAPS_ITEM = {
-  label: 'Maps',
+  label: 'Cartes',
   to: '/maps',
   target: '',
-  description: 'View offline maps',
+  description: 'Consulter des cartes hors ligne',
   icon: <IconMapRoute size={48} />,
   installed: true,
   displayOrder: 4,
   poweredBy: null,
 }
 
-// System items shown after all apps
+// Éléments système affichés après les applications
 const SYSTEM_ITEMS = [
   {
-    label: 'Easy Setup',
+    label: 'Configuration guidée',
     to: '/easy-setup',
     target: '',
     description:
-      'Not sure where to start? Use the setup wizard to quickly configure your N.O.M.A.D.!',
+      'Vous ne savez pas par où commencer ? Utilisez l’assistant pour configurer rapidement N.O.M.A.D.',
     icon: <IconBolt size={48} />,
     installed: true,
     displayOrder: 50,
     poweredBy: null,
   },
   {
-    label: 'Install Apps',
+    label: 'Installer des apps',
     to: '/settings/apps',
     target: '',
-    description: 'Not seeing your favorite app? Install it here!',
+    description: 'Votre application n’est pas encore installée ? Ajoutez-la ici.',
     icon: <IconPlus size={48} />,
     installed: true,
     displayOrder: 51,
     poweredBy: null,
   },
   {
-    label: 'Docs',
+    label: 'Documentation',
     to: '/docs/home',
     target: '',
-    description: 'Read Project N.O.M.A.D. manuals and guides',
+    description: 'Lire les guides et manuels Project N.O.M.A.D.',
     icon: <IconHelp size={48} />,
     installed: true,
     displayOrder: 52,
     poweredBy: null,
   },
   {
-    label: 'Settings',
+    label: 'Paramètres',
     to: '/settings/system',
     target: '',
-    description: 'Configure your N.O.M.A.D. settings',
+    description: 'Configurer les paramètres N.O.M.A.D.',
     icon: <IconSettings size={48} />,
     installed: true,
     displayOrder: 53,
@@ -90,27 +90,31 @@ export default function Home(props: {
   }
 }) {
   const items: DashboardItem[] = []
-  const updateInfo = useUpdateAvailable();
+  const updateInfo = useUpdateAvailable()
   const { aiAssistantName } = usePage<{ aiAssistantName: string }>().props
 
-  // Check if user has visited Easy Setup
+  // Vérifie si l’utilisateur a déjà ouvert la configuration guidée
   const { data: easySetupVisited } = useSystemSetting({
     key: 'ui.hasVisitedEasySetup'
   })
-  const shouldHighlightEasySetup = easySetupVisited?.value ? String(easySetupVisited.value) !== 'true' : false
+  const shouldHighlightEasySetup =
+    easySetupVisited?.value ? String(easySetupVisited.value) !== 'true' : false
 
-  // Add installed services (non-dependency services only)
+  // Ajoute les services installés (hors dépendances)
   props.system.services
     .filter((service) => service.installed && service.ui_location)
     .forEach((service) => {
       items.push({
-        // Inject custom AI Assistant name if this is the chat service
-        label: service.service_name === SERVICE_NAMES.OLLAMA && aiAssistantName ? aiAssistantName : (service.friendly_name || service.service_name),
+        // Injecte le nom personnalisé de l’assistant IA si c’est le service de chat
+        label:
+          service.service_name === SERVICE_NAMES.OLLAMA && aiAssistantName
+            ? aiAssistantName
+            : (service.friendly_name || service.service_name),
         to: service.ui_location ? getServiceLink(service.ui_location) : '#',
         target: '_blank',
         description:
           service.description ||
-          `Access the ${service.friendly_name || service.service_name} application`,
+          `Accéder à l’application ${service.friendly_name || service.service_name}`,
         icon: service.icon ? (
           <DynamicIcon icon={service.icon as DynamicIconName} className="!size-12" />
         ) : (
@@ -122,29 +126,29 @@ export default function Home(props: {
       })
     })
 
-  // Add Maps as a Core Capability
+  // Ajoute Cartes comme capacité cœur
   items.push(MAPS_ITEM)
 
-  // Add system items
+  // Ajoute les éléments système
   items.push(...SYSTEM_ITEMS)
 
-  // Sort all items by display order
+  // Trie tous les éléments par ordre d’affichage
   items.sort((a, b) => a.displayOrder - b.displayOrder)
 
   return (
     <AppLayout>
-      <Head title="Command Center" />
+      <Head title="Centre de commande" />
       {
         updateInfo?.updateAvailable && (
           <div className='flex justify-center items-center p-4 w-full'>
             <Alert
-              title="An update is available for Project N.O.M.A.D.!"
+              title="Une mise à jour est disponible pour Project N.O.M.A.D. !"
               type="info-inverted"
               variant="solid"
               className="w-full"
               buttonProps={{
                 variant: 'primary',
-                children: 'Go to Settings',
+                children: 'Aller aux paramètres',
                 icon: 'IconSettings',
                 onClick: () => router.visit('/settings/update'),
               }}
@@ -154,7 +158,7 @@ export default function Home(props: {
       }
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
         {items.map((item) => {
-          const isEasySetup = item.label === 'Easy Setup'
+          const isEasySetup = item.label === 'Configuration guidée'
           const shouldHighlight = isEasySetup && shouldHighlightEasySetup
 
           const tileContent = (
@@ -166,13 +170,13 @@ export default function Home(props: {
                     style={{ animationDuration: '1.5s' }}
                   ></span>
                   <span className="relative inline-flex items-center rounded-full px-2.5 py-1 bg-desert-orange-light text-xs font-semibold text-white shadow-sm">
-                    Start here!
+                    Commencer ici !
                   </span>
                 </span>
               )}
               <div className="flex items-center justify-center mb-2">{item.icon}</div>
               <h3 className="font-bold text-2xl">{item.label}</h3>
-              {item.poweredBy && <p className="text-sm opacity-80">Powered by {item.poweredBy}</p>}
+              {item.poweredBy && <p className="text-sm opacity-80">Propulsé par {item.poweredBy}</p>}
               <p className="xl:text-lg mt-2">{item.description}</p>
             </div>
           )
